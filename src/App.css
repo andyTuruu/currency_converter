@@ -1,0 +1,135 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* --- App.css --- */
+
+/* 
+  Dark / Neon Inspired Currency Converter
+  ---------------------------------------
+  Feel free to adjust the color values, 
+  border radii, and transitions to taste.
+*/
+
+:root {
+  --bg-color: #1e1f29;
+  --container-bg-color: #2c2f3a;
+  --accent-color: #00d1b2; /* Neon-inspired accent (you can change to something else, e.g. #7289da for Discord-y look) */
+  --font-color: #fff;
+  --border-radius: 10px;
+  --transition-speed: 0.3s;
+  --box-shadow-color: rgba(0, 0, 0, 0.6);
+  --inner-shadow-color: rgba(0, 209, 178, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--font-color);
+}
+
+/* MAIN APP WRAPPER */
+.App {
+  width: 100%;
+  max-width: 450px;
+  margin: auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* CONVERTER CONTAINER */
+.converter-container {
+  position: relative;
+  background-color: var(--container-bg-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 0 20px var(--box-shadow-color);
+  transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.converter-container.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* OPTIONAL LOADING OVERLAY */
+.converter-container.loading::after {
+  content: "Converting...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--container-bg-color);
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  color: #ccc;
+  pointer-events: none;
+  font-size: 0.9rem;
+}
+
+/* TITLE */
+.converter-container h1 {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  color: var(--accent-color);
+  letter-spacing: 0.5px;
+}
+
+/* FORM GROUPS */
+.converter-group {
+  margin: 1rem 0;
+}
+
+/* INPUT & SELECT */
+.converter-group input,
+.converter-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  background-color: #21222b;
+  color: var(--font-color);
+  outline: none;
+  transition: border var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+}
+
+/* FOCUS STATES */
+.converter-group input:focus,
+.converter-group select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 8px var(--inner-shadow-color);
+}
+
+/* DISABLED SELECT (WHEN LOADING) */
+.converter-group select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* RESULT */
+.converted-amount {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+/* OPTIONAL: Add a little hover highlight to selects (desktop only) */
+.converter-group select:hover {
+  box-shadow: 0 0 5px var(--inner-shadow-color);
+}
