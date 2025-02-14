@@ -19,7 +19,7 @@ Check out the live demo here:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/andyTuruu/currency-converter.git
+   git clone https://github.com/andyTuruu/currency_converter.git
 2. Navigate to your directory
 3. Install dependencies: 
    ```bash
