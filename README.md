@@ -24,7 +24,7 @@ Check out the live demo here:
 3. Install dependencies: 
    ```bash
    npm install
-4. Start th development server:
+4. Start the development server:
    ```bash
    npm run dev
 5. Open http://localhost:5173 (or whichever port Vite is using) in your browser to see the app in action.
