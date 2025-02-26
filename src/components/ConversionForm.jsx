@@ -1,6 +1,6 @@
 // ConversionForm.jsx
 import Options from "./Options";
-import formatConversion from "./utils/formatConversion";
+import formatConversion from "../utils/formatConversion";
 
 export default function ConversionForm({
   amount,

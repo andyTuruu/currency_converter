@@ -7,8 +7,8 @@ import {
   Tooltip,
   Line,
 } from "recharts";
-import useIsNarrow from "./hooks/useIsNarrow";
-import formatGraphTick from "./utils/formatGraphTick";
+import useIsNarrow from "../hooks/useIsNarrow";
+import formatGraphTick from "../utils/formatGraphTick";
 
 export default function HistoricalChart({ data, theme }) {
   const isNarrow = useIsNarrow();

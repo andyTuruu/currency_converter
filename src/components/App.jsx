@@ -1,13 +1,13 @@
 import { useState } from "react";
-import "./App.css";
+import "../App.css";
 import TopBar from "./TopBar";
 import ConversionForm from "./ConversionForm";
 import ActionButtons from "./ActionButtons";
 import HistoricalSection from "./HistoricalSection";
-import useTheme from "./hooks/useTheme";
-import useConversion from "./hooks/useConversion";
-import useHistoricalRates from "./hooks/useHistoricalRates";
-import useWindowWidth from "./hooks/useWindowWidth";
+import useTheme from "../hooks/useTheme";
+import useConversion from "../hooks/useConversion";
+import useHistoricalRates from "../hooks/useHistoricalRates";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 export default function App() {
   const { theme, toggleTheme } = useTheme();
