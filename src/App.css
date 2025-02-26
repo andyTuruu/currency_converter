@@ -35,15 +35,15 @@ body {
 }
 
 .large-watermark {
-  font-size: 20rem;
+  font-size: 15rem;
 }
 
 .mid-watermark {
-  font-size: 16rem; /* Adjust as needed for smaller screens */
+  font-size: 12rem; /* Adjust as needed for smaller screens */
 }
 
 .small-watermark {
-  font-size: 12rem; /* Adjust as needed for smaller screens */
+  font-size: 10rem; /* Adjust as needed for smaller screens */
 }
 
 .watermark span:nth-child(1) {
@@ -96,6 +96,7 @@ body {
   padding: 2rem;
   width: 100%;
   max-width: 800px;
+  z-index: 1;
 }
 
 .top-bar {
