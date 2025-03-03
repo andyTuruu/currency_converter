@@ -1,36 +1,48 @@
 // HistoricalSection.jsx
 import HistoricalChart from "./HistoricalChart";
-
-const toggleHistoricalData = () => {
-  setShowHistorical((prev) => {
-    const newVal = !prev;
-    if (newVal) {
-      document.body.classList.add("historical-active");
-    } else {
-      document.body.classList.remove("historical-active");
-    }
-    return newVal;
-  });
-};
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function HistoricalSection({
-  date,
-  setDate,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
   historicalRates,
   isLoading,
   theme,
 }) {
+  const commonDatePickerProps = {
+    disabled: isLoading,
+    dateFormat: "yyyy-MM-dd",
+    showYearDropdown: true,
+    scrollableYearDropdown: true,
+    yearDropdownItemNumber: 50,
+    minDate: new Date("1999-01-05"), // Correct minimum date
+    maxDate: new Date(),
+  };
+
   return (
     <div className="historical-section">
-      <div className="calendar">
-        <label htmlFor="historicalDate">Historical Date:</label>
-        <input
-          id="historicalDate"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          disabled={isLoading}
-        />
+      <div className="date-pickers">
+        <div className="calendar">
+          <label htmlFor="historicalStartDate">Start Date:</label>
+          <DatePicker
+            id="historicalStartDate"
+            selected={startDate}
+            onChange={setStartDate}
+            {...commonDatePickerProps}
+          />
+        </div>
+        <div className="calendar">
+          <label htmlFor="historicalEndDate">End Date:</label>
+          <DatePicker
+            id="historicalEndDate"
+            selected={endDate}
+            onChange={setEndDate}
+            {...commonDatePickerProps}
+          />
+        </div>
       </div>
       {historicalRates.length > 0 && (
         <div className="chart-section">

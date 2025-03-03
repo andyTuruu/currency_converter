@@ -1,24 +1,39 @@
 // hooks/useHistoricalRates.js
 import { useState, useEffect } from "react";
 
-export default function useHistoricalRates(base, symbol, date, showHistorical) {
+export default function useHistoricalRates(
+  base,
+  symbol,
+  startDate,
+  endDate,
+  showHistorical
+) {
   const [historicalRates, setHistoricalRates] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // If there's no date or user hasn't opted to view historical data, clear any data.
-    if (!date || !showHistorical) {
+    // Clear data if no startDate, endDate, or historical view is toggled off.
+    if (!startDate || !endDate || !showHistorical) {
       setHistoricalRates([]);
+      return;
+    }
+
+    // Check if startDate is after endDate
+    if (startDate > endDate) {
+      setHistoricalRates([]);
+      setError(new Error("Start date must be earlier than end date."));
       return;
     }
 
     const fetchHistoricalRates = async () => {
       setIsLoading(true);
       setError(null);
+      const formattedStartDate = startDate.toISOString().split("T")[0];
+      const formattedEndDate = endDate.toISOString().split("T")[0];
       try {
         const res = await fetch(
-          `https://api.frankfurter.app/${date}..?base=${base}&symbols=${symbol}`
+          `https://api.frankfurter.app/${formattedStartDate}..${formattedEndDate}?base=${base}&symbols=${symbol}`
         );
         if (!res.ok) {
           throw new Error(`Request failed with status ${res.status}`);
@@ -43,7 +58,7 @@ export default function useHistoricalRates(base, symbol, date, showHistorical) {
     };
 
     fetchHistoricalRates();
-  }, [base, symbol, date, showHistorical]);
+  }, [base, symbol, startDate, endDate, showHistorical]);
 
   return { historicalRates, isLoading, error };
 }

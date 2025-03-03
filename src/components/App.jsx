@@ -4,6 +4,7 @@ import TopBar from "./TopBar";
 import ConversionForm from "./ConversionForm";
 import ActionButtons from "./ActionButtons";
 import HistoricalSection from "./HistoricalSection";
+import GlowingEffect from "./GlowingEffect";
 import useTheme from "../hooks/useTheme";
 import useConversion from "../hooks/useConversion";
 import useHistoricalRates from "../hooks/useHistoricalRates";
@@ -14,10 +15,10 @@ export default function App() {
   const [convertFrom, setConvertFrom] = useState("USD");
   const [convertTo, setConvertTo] = useState("EUR");
   const [amount, setAmount] = useState(100);
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(new Date());
   const [showHistorical, setShowHistorical] = useState(false);
 
-  // Inside your component:
   const { convertedAmount, isLoading: conversionLoading } = useConversion(
     convertFrom,
     convertTo,
@@ -27,7 +28,8 @@ export default function App() {
   const { historicalRates, isLoading: historicalLoading } = useHistoricalRates(
     convertFrom,
     convertTo,
-    date,
+    startDate,
+    endDate,
     showHistorical
   );
   const isLoading = conversionLoading || historicalLoading;
@@ -35,7 +37,7 @@ export default function App() {
   const windowWidth = useWindowWidth();
 
   let watermarkClass = "";
-  let symbols = ["$", "¥", "€", "£"];
+  let currencySymbols = ["$", "¥", "€", "£"];
 
   if (windowWidth > 820) {
     watermarkClass = "large-watermark";
@@ -43,8 +45,7 @@ export default function App() {
     watermarkClass = "mid-watermark";
   } else {
     watermarkClass = "small-watermark";
-    // Use fewer symbols on very small screens if desired
-    symbols = ["$", "¥", "€"];
+    currencySymbols = ["$", "¥", "€"];
   }
 
   const handleSwap = () => {
@@ -53,51 +54,56 @@ export default function App() {
   };
 
   return (
-    <div className="app-container">
-      {!showHistorical && (
-        <div className={`watermark ${watermarkClass}`}>
-          {symbols.map((symbol, index) => (
-            <span key={index}>{symbol}</span>
-          ))}
-        </div>
-      )}
-      <div className="card">
-        <TopBar theme={theme} toggleTheme={toggleTheme} />
-
-        {isLoading && (
-          <div className="loading-indicator">
-            <div className="spinner"></div>
+    <>
+      <GlowingEffect theme={theme} count={6} minDistance={20} />
+      <div className="app-container">
+        {!showHistorical && (
+          <div className={`watermark ${watermarkClass}`}>
+            {currencySymbols.map((symbol, index) => (
+              <span key={index}>{symbol}</span>
+            ))}
           </div>
         )}
+        <div className="card">
+          <TopBar theme={theme} toggleTheme={toggleTheme} />
 
-        <ConversionForm
-          amount={amount}
-          setAmount={setAmount}
-          convertFrom={convertFrom}
-          setConvertFrom={setConvertFrom}
-          convertTo={convertTo}
-          setConvertTo={setConvertTo}
-          convertedAmount={convertedAmount}
-          isLoading={isLoading}
-        />
+          {isLoading && (
+            <div className="loading-indicator">
+              <div className="spinner"></div>
+            </div>
+          )}
 
-        <ActionButtons
-          onSwap={handleSwap}
-          toggleHistorical={() => setShowHistorical(!showHistorical)}
-          showHistorical={showHistorical}
-          isLoading={isLoading}
-        />
-
-        {showHistorical && (
-          <HistoricalSection
-            date={date}
-            setDate={setDate}
-            historicalRates={historicalRates}
+          <ConversionForm
+            amount={amount}
+            setAmount={setAmount}
+            convertFrom={convertFrom}
+            setConvertFrom={setConvertFrom}
+            convertTo={convertTo}
+            setConvertTo={setConvertTo}
+            convertedAmount={convertedAmount}
             isLoading={isLoading}
-            theme={theme}
           />
-        )}
+
+          <ActionButtons
+            onSwap={handleSwap}
+            toggleHistorical={() => setShowHistorical(!showHistorical)}
+            showHistorical={showHistorical}
+            isLoading={isLoading}
+          />
+
+          {showHistorical && (
+            <HistoricalSection
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              historicalRates={historicalRates}
+              isLoading={isLoading}
+              theme={theme}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

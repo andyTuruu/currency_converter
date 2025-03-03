@@ -2,6 +2,28 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+/* Light theme variables */
+.light-theme {
+  --body-color: linear-gradient(135deg, #b08d57, #f8b500, #fceabb);
+  --bg-color: #f0f0f0;
+  --font-color: #333;
+  --accent-color: #f39c12;
+  --card-bg: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+}
+
+/* Dark theme variables */
+.dark-theme {
+  --body-color: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  --bg-color: #1e1e2f;
+  --font-color: #e0e0e0;
+  --accent-color: #4caf50;
+  --card-bg: #2b2c3c;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --border-radius: 12px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +47,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--font-color);
-  opacity: 0.05;
+  opacity: 0.1;
   white-space: nowrap;
   pointer-events: none;
   z-index: 0;
@@ -57,28 +79,6 @@ body {
 }
 .watermark span:nth-child(4) {
   transform: rotate(-5deg);
-}
-
-/* Light theme variables */
-.light-theme {
-  --body-color: linear-gradient(135deg, #b08d57, #f8b500, #fceabb);
-  --bg-color: #f0f0f0;
-  --font-color: #333;
-  --accent-color: #f39c12;
-  --card-bg: #e0e0e0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --border-radius: 12px;
-}
-
-/* Dark theme variables */
-.dark-theme {
-  --body-color: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  --bg-color: #1e1e2f;
-  --font-color: #e0e0e0;
-  --accent-color: #4caf50;
-  --card-bg: #2b2c3c;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --border-radius: 12px;
 }
 
 .app-container {
@@ -184,6 +184,17 @@ body {
   gap: 1rem;
 }
 
+.date-pickers {
+  display: flex;
+  gap: 1rem;
+}
+
+.date-pickers .calendar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .calendar label {
   display: block;
   margin-bottom: 0.5rem;
@@ -260,6 +271,53 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* Dazzling background container */
+.dazzle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1; /* Behind main content */
+}
+
+/* Light theme: shiny diamond-like suns */
+.dazzle-light span {
+  position: absolute;
+  font-size: 1.2rem; /* adjust size as needed */
+  color: #f8f8f8; /* off white */
+  text-shadow: 0 0 6px #fff, 0 0 10px #fff; /* subtle glow */
+}
+/* Dark theme: shiny royal emerald green stars */
+.dazzle-dark span {
+  position: absolute;
+  font-size: 0.6rem;
+  color: #f5f5f5;
+  text-shadow: 0 0 6px #fff, 0 0 10px #fff; /* subtle glow */
+}
+
+/* Subtle sparkle effect for dazzling symbols */
+.dazzle span {
+  animation: subtleSparkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes subtleSparkle {
+  0% {
+    opacity: 0.5;
+    transform: rotate(var(--init-rotation)) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(var(--init-rotation)) scale(1.03);
+  }
+  100% {
+    opacity: 0.5;
+    transform: rotate(var(--init-rotation)) scale(1);
   }
 }
 
