@@ -1,13 +1,15 @@
 # Currency Converter
 
 A responsive React-based currency converter app that not only converts current exchange rates but also displays historical trends. The app features a modern, dynamic design with custom theming (light/dark mode) and detailed historical charts.
+
 Check out the live app here:  
 **[Common Currency Converter](https://common-currency-converter.netlify.app/)**
 
-![Currency Converter Preview](./CurrencyConverter1.png)  
-![Currency Converter Preview](./CurrencyConverter2.png)  
-![Currency Converter Preview](./CurrencyConverter3.png)  
-![Currency Converter Preview](./CurrencyConverter4.png)
+![Currency Converter Preview1](./CC1.png)  
+![Currency Converter Preview2](./CC2.png)  
+![Currency Converter Preview3](./CC3.png)  
+![Currency Converter Preview4](./CC4.png)  
+![Currency Converter Preview5](./CC5.png)  
 
 ## Features
 
@@ -23,8 +25,8 @@ Check out the live app here:
 - **Dynamic Theming**:
   Toggle between light and dark themes for a personalized user experience.
 
-- **Playful Watermarks**:
-  Enjoy subtle currency symbols in the background that adapt based on your screen size.
+- **Playful Background**:
+  Enjoy subtle currency symbols that adapt based on your screen size and randomly generated glowing suns/stars in the background.
 
 ## Installation & Setup
 
