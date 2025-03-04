@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <>
-      <GlowingEffect theme={theme} count={6} minDistance={20} />
+      <GlowingEffect theme={theme} count={8} minDistance={20} />
       <div className="app-container">
         {!showHistorical && (
           <div className={`watermark ${watermarkClass}`}>
